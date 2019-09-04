@@ -1,0 +1,36 @@
+ {% extends "base.html" %}
+ {% load urlify %}
+
+ {%block head_title%} {{instance.title}} |{{ block.super }} {%endblock head_title%}
+
+{% block content %}
+<p>
+<div class="col-sm-6 offset-sm-3">
+        <div class="row">
+                <div class='col-sm-12'>
+                <div class="card">
+                <div class="card-body">
+
+        <b>{{instance.title}}</b> <small>{{instance.timestamp | timesince}} ago </small><br/>
+        
+        {% if instance.image %}
+        <img src ='{{instance.image.url}}' class="img-responsive" />
+        {% endif %} <br />
+        Author : {{ instance.user }}
+
+        <div class="content_markdown"> {{instance.content }} </div><br />
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}">
+            Facebook
+            </a>
+
+           <a href="https://twitter.com/home?status={{ instance.content | urlify }}%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@justinmitchel%20{{request.build_absolute_uri}}">
+             Twitter
+             </a>
+             <p>
+             <div class="fb-like" data-href="{{request.build_absolute_uri}}" data-width="" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+        </p> <hr />
+             <div class="fb-comments" data-href="{{request.build_absolute_uri}}" data-width="" data-numposts="5"></div>
+
+             </div></div></div></div>
+</div> </p>
+{% endblock content %}

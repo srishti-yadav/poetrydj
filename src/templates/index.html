@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-sm-6 offset-sm-3">
+            
+    <h2>Your Poetries....</h2>
+     {% for q in object_list %}
+     <div class="row">
+     <div class='col-sm-12'>
+     <div class="card">
+     <div class="card-body">
+     <a href='{{q.get_absolute_url}}'>
+     {{q.id}} .
+     <b>{{q.title}} </b> </a> <small>{{q.timestamp | timesince}} ago</small> <br />
+     {% if q.image %}
+     <img src ='{{q.image.url}}' class="img-responsive" />
+     {% endif %} <br />
+     Author : {{q.user}}
+     <div class="content_markdown"> <p>{{q.content | truncatechars:120}} </p></div>
+     <p> <a href="{{q.get_absolute_url}}" class='btn btn-primary' role='button'>View</a> </p>
+     
+     </div>
+     </div>
+    </div>
+    {% cycle "" "</div>  <div class='row'>" %}
+     </div> <br/>
+     {% endfor %}
+ </div>
+     {% endblock content %}
